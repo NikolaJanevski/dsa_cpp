@@ -4,10 +4,10 @@
 #include <memory>
 #include "Interface.hpp"
 
-template <typename E> class LIFO : protected Interface<E> {
+template <typename E> class LIFO : public Interface<E> {
 public:
     LIFO() {
-        _data = std::make_unique<E []>(this->_size);
+        _data = std::make_unique<E []>(this->_capacity);
     };
 
     LIFO(int capacity) : Interface<E>(capacity) {

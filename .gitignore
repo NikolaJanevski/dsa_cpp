@@ -1,5 +1,6 @@
 *.o
 
 main
+LIFO_test_main
 
 .vscode

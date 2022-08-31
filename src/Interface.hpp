@@ -27,6 +27,10 @@ public:
     int size() {
         return _size;
     };
+
+    int capacity() {
+        return _capacity;
+    }
 protected:
     int _size = 0;
     int _capacity = 0;
