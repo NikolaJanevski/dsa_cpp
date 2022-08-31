@@ -10,9 +10,8 @@ public:
     virtual E get();
     bool isEmpty();
     int size();
-private:
+protected:
     int _size;
-    E _data [];
 };
 
 #endif
