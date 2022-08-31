@@ -12,17 +12,11 @@ TARGET = main
 
 all: main
 
-main: Interface.o main.o FIFO.o
-	$(CC) $(CFLAGS) Interface.o main.o FIFO.o -o main
-
-Interface.o: src/Interface.cpp
-	$(CC) $(CFLAGS) -c src/Interface.cpp
+main: main.o
+	$(CC) $(CFLAGS) main.o -o main
 
 main.o: src/main.cpp
 	$(CC) $(CFLAGS) -c src/main.cpp
-
-FIFO.o: src/FIFO.cpp
-	$(CC) $(CFLAGS) -c src/FIFO.cpp
 
 clean:
 	$(RM) *.o main
