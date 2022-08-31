@@ -30,7 +30,8 @@ public:
             
             _data = std::move(temp);
         }
-        _data[_top++] = value;
+        this->_size++;
+        _data[++_top] = value;
     }
 
     E get() {
