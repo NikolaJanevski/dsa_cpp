@@ -54,14 +54,6 @@ template <typename E> class FIFO : public Interface<E> {
         return value;
     }
 
-    void print() {
-        for (int i = 0; i < this->_size; i++) {
-            std::cout << (i + _back) % this->_capacity << " " << _data[(i + _back) % this->_capacity] << ", ";
-        }
-
-        std::cout << std::endl;
-    }
-
  private:
     int _front = -1;
     int _back = 0;

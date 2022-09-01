@@ -142,5 +142,5 @@ namespace {
         ASSERT_TRUE(queue.isEmpty());
         ASSERT_EQ(queue.capacity(), 20);
         EXPECT_THROW(queue.get(), std::out_of_range);
-    }    
+    }
 }  // namespace
