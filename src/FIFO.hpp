@@ -4,10 +4,10 @@
 #include <memory>
 #include "Interface.hpp"
 
-template <typename E> class FIFO : protected Interface<E> {
+template <typename E> class FIFO : public Interface<E> {
 public:
     FIFO() {
-        _data = std::make_unique<E []>(this->_size);
+        _data = std::make_unique<E []>(this->_capacity);
     };
 
     FIFO(int capacity) : Interface<E>(capacity) {
@@ -30,12 +30,17 @@ public:
             _front = 0;
             
             _data = std::move(temp);
+            this->_capacity = this->_capacity * 2;
         }
-        _data[_back++] = value;
+        this->_size++;
+        _data[++_back] = value;
+        if (this->_front < 0) {
+            this->_front = 0;
+        }
     }
 
     E get() {
-        if (_front < 0) {
+        if (_front < 0 || _front >= this->_capacity) {
             throw std::out_of_range ("Queue is empty");
         }
 

@@ -11,7 +11,7 @@ CFLAGS  = -g -Wall -std=c++20
 TARGET = main
 
 
-all: main LIFO_test_main
+all: main LIFO_test_main FIFO_test_main
 
 main: main.o
 	$(CC) $(CFLAGS) main.o $(GTEST) -o main
@@ -28,5 +28,14 @@ LIFO_test_main.o: src/LIFO_test_main.cpp
 LIFO_test.o: src/LIFO_test.cpp
 	$(CC) $(CFLAGS) -c src/LIFO_test.cpp
 
+FIFO_test_main: FIFO_test.o FIFO_test_main.o
+	$(CC) $(CFLAGS) FIFO_test.o FIFO_test_main.o $(GTEST) -o FIFO_test_main
+
+FIFO_test_main.o: src/FIFO_test_main.cpp
+	$(CC) $(CFLAGS) -c src/FIFO_test_main.cpp
+
+FIFO_test.o: src/FIFO_test.cpp
+	$(CC) $(CFLAGS) -c src/FIFO_test.cpp
+
 clean:
-	$(RM) *.o main LIFO_test_main
+	$(RM) *.o main LIFO_test_main FIFO_test_main
