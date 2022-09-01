@@ -1,3 +1,6 @@
+// Copyright 2022 Nikola Janevski. All rights reserved.
+// Licensed under GNU Public.
+
 #include "gtest/gtest.h"
 #include "LIFO.hpp"
 
@@ -85,4 +88,4 @@ namespace {
             ASSERT_EQ(stack.get(), i);
         }
     }
-}
+}  // namespace

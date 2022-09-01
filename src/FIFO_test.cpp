@@ -1,3 +1,6 @@
+// Copyright 2022 Nikola Janevski. All rights reserved.
+// Licensed under GNU Public.
+
 #include "gtest/gtest.h"
 #include "FIFO.hpp"
 
@@ -105,4 +108,39 @@ namespace {
         ASSERT_EQ(queue.capacity(), 1000);
         EXPECT_THROW(queue.get(), std::out_of_range);
     }
-}
+
+    TEST(FIFO_Test, AddingRemovingAddingAgainWithAutomatiCapacityIncrease) {
+        FIFO<int> queue(5);
+
+        ASSERT_EQ(queue.size(), 0);
+        ASSERT_TRUE(queue.isEmpty());
+
+        for (int i = 0; i < 10; i++) {
+            queue.add(i);
+        }
+
+        for (int i = 0; i < 3; i++) {
+            queue.get();
+        }
+
+        ASSERT_EQ(queue.size(), 7);
+        ASSERT_EQ(queue.capacity(), 10);
+
+        for (int i = 10; i < 15; i++) {
+            queue.add(i);
+        }
+
+        ASSERT_EQ(queue.size(), 12);
+        ASSERT_EQ(queue.capacity(), 20);
+
+
+        for (int i = 3; i < 15; i++) {
+            ASSERT_EQ(queue.get(), i);
+        }
+
+        ASSERT_EQ(queue.size(), 0);
+        ASSERT_TRUE(queue.isEmpty());
+        ASSERT_EQ(queue.capacity(), 20);
+        EXPECT_THROW(queue.get(), std::out_of_range);
+    }    
+}  // namespace

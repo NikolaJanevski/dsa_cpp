@@ -1,33 +1,38 @@
-#ifndef _LIFO_H
-#define _LIFO_H
+// Copyright 2022 Nikola Janevski. All rights reserved.
+// Licensed under GNU Public.
+
+#ifndef SRC_LIFO_HPP_
+#define SRC_LIFO_HPP_
 
 #include <memory>
+#include <utility>
 #include "Interface.hpp"
 
 template <typename E> class LIFO : public Interface<E> {
-public:
+ public:
     LIFO() {
-        _data = std::make_unique<E []>(this->_capacity);
+        _data = std::make_unique<E[]>(this->_capacity);
     };
 
-    LIFO(int capacity) : Interface<E>(capacity) {
-        _data = std::make_unique<E []>(this->_capacity);
-    };
+    explicit LIFO(int capacity) : Interface<E>(capacity) {
+        _data = std::make_unique<E[]>(this->_capacity);
+    }
 
     ~LIFO() {
         _data.reset();
-    };
+    }
 
     void add(E value) {
         if (this->_size >= this->_capacity) {
             // increase capacity
-            std::unique_ptr<E []> temp = std::make_unique<E []>(this->_capacity * 2);
+            std::unique_ptr<E[]> temp =
+                std::make_unique<E[]>(this->_capacity * 2);
             for (int i = 0; i < this->_capacity; i++) {
                 temp[i] = _data[i];
             }
-            
+
             this->_capacity = this->_capacity * 2;
-            
+
             _data = std::move(temp);
         }
         this->_size++;
@@ -36,15 +41,16 @@ public:
 
     E get() {
         if (_top < 0) {
-            throw std::out_of_range ("Stack is empty");
+            throw std::out_of_range("Stack is empty");
         }
 
         this->_size--;
         return _data[_top--];
     }
-private:
+
+ private:
     int _top = -1;
-    std::unique_ptr<E []> _data;
+    std::unique_ptr<E[]> _data;
 };
 
-#endif
+#endif  // SRC_LIFO_HPP_

@@ -1,25 +1,28 @@
-#ifndef _INTERFACE_H
-#define _INTERFACE_H
+// Copyright 2022 Nikola Janevski. All rights reserved.
+// Licensed under GNU Public.
+
+#ifndef SRC_INTERFACE_HPP_
+#define SRC_INTERFACE_HPP_
 
 template <typename E>
 class Interface {
-public:
+ public:
     /**
      * @brief Construct a new Interface object with default capacity of 1000.
      * 
      */
     Interface() {
         _capacity = 1000;
-    };
+    }
 
     /**
      * @brief Construct a new Interface object with the specified capacity.
      * 
      * @param capacity the initial capacity of the object.
      */
-    Interface(int capacity) {
+    explicit Interface(int capacity) {
         _capacity = capacity;
-    };
+    }
 
     /**
      * @brief Destroy the Interface object and sets the capacity and size to 0.
@@ -28,7 +31,7 @@ public:
     ~Interface() {
         _capacity = 0;
         _size = 0;
-    };
+    }
 
     /**
      * @brief Adds an element to the container.
@@ -54,7 +57,7 @@ public:
      * @return E the element that was removed.
      */
     virtual E get() = 0;
-    
+
     /**
      * @brief Checks if the container is empty.
      * 
@@ -63,7 +66,7 @@ public:
      */
     bool isEmpty() {
         return _size == 0;
-    };
+    }
 
     /**
      * @brief Returns the number of elements stored in the container.
@@ -72,7 +75,7 @@ public:
      */
     int size() {
         return _size;
-    };
+    }
 
     /**
      * @brief Returns the capacity of the container.
@@ -82,10 +85,10 @@ public:
     int capacity() {
         return _capacity;
     }
-    
-protected:
+
+ protected:
     int _size = 0;
     int _capacity = 0;
 };
 
-#endif
+#endif  // SRC_INTERFACE_HPP_
