@@ -33,14 +33,14 @@ template <typename E> class FIFO : public Interface<E> {
             }
 
             _back = 0;
-            _front = this->_size - 1;
+            _front = this->_size;
 
             _data = std::move(temp);
             this->_capacity = this->_capacity * 2;
         }
         this->_size++;
-        _front = (++_front) % this->_capacity;
         _data[_front] = value;
+        _front = (++_front) % this->_capacity;
     }
 
     E get() {
@@ -49,14 +49,15 @@ template <typename E> class FIFO : public Interface<E> {
         }
 
         this->_size--;
+        
         E value = _data[_back];
         _back = (++_back) % this->_capacity;
         return value;
     }
 
  private:
-    int _front = -1;
-    int _back = 0;
+    size_t _front = 0;
+    size_t _back = 0;
     std::unique_ptr<E[]> _data;
 };
 

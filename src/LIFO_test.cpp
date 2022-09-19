@@ -57,17 +57,18 @@ namespace {
         ASSERT_EQ(stack.size(), 0);
     }
 
+
     TEST(LIFO_Test, TestLIFOAutomaticCapacityIncrease) {
         LIFO<int> stack(10);
 
         ASSERT_EQ(stack.size(), 0);
         ASSERT_TRUE(stack.isEmpty());
         ASSERT_EQ(stack.capacity(), 10);
-
+        
         for (int i = 0; i < 20; i++) {
             stack.add(i);
         }
-
+        
         ASSERT_EQ(stack.capacity(), 20);
     }
 
@@ -88,4 +89,5 @@ namespace {
             ASSERT_EQ(stack.get(), i);
         }
     }
+    
 }  // namespace

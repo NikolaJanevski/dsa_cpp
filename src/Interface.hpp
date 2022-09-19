@@ -73,7 +73,7 @@ class Interface {
      * 
      * @return int the number of elements stored in the container.
      */
-    int size() {
+    size_t size() {
         return _size;
     }
 
@@ -82,13 +82,13 @@ class Interface {
      * 
      * @return int the capacity of the container.
      */
-    int capacity() {
+    size_t capacity() {
         return _capacity;
     }
 
  protected:
-    int _size = 0;
-    int _capacity = 0;
+    size_t _size = 0;
+    size_t _capacity = 0;
 };
 
 #endif  // SRC_INTERFACE_HPP_

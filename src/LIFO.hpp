@@ -27,7 +27,7 @@ template <typename E> class LIFO : public Interface<E> {
             // increase capacity
             std::unique_ptr<E[]> temp =
                 std::make_unique<E[]>(this->_capacity * 2);
-            for (int i = 0; i < this->_capacity; i++) {
+            for (size_t i = 0; i < this->_capacity; i++) {
                 temp[i] = _data[i];
             }
 
@@ -36,20 +36,20 @@ template <typename E> class LIFO : public Interface<E> {
             _data = std::move(temp);
         }
         this->_size++;
-        _data[++_top] = value;
+        _data[_top++] = value;
     }
 
     E get() {
-        if (_top < 0) {
+        if (_top == 0) {
             throw std::out_of_range("Stack is empty");
         }
 
         this->_size--;
-        return _data[_top--];
+        return _data[--_top];
     }
 
  private:
-    int _top = -1;
+    size_t _top = 0;
     std::unique_ptr<E[]> _data;
 };
 
